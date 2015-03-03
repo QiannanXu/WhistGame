@@ -36,7 +36,7 @@ public class NormalPlayer implements Player {
     @Override
     public void dropBlood(NormalPlayer player2) {
         if(player2 instanceof Solider){
-            player2.blood = player2.blood - this.attack + player2.getArmor().get().getDefense();
+            player2.blood = player2.blood - this.attack + player2.getDefense();
         }else{
             player2.blood = player2.blood - this.attack;
         }
@@ -69,10 +69,6 @@ public class NormalPlayer implements Player {
         this.blood = blood;
     }
 
-    public int getAttack() {
-        return attack;
-    }
-
     public void setAttack(int attack) {
         this.attack = attack;
     }
@@ -97,6 +93,16 @@ public class NormalPlayer implements Player {
     @Override
     public boolean hasArmor(){
         return false;
+    }
+
+    @Override
+    public int getAttack() {
+        return attack;
+    }
+
+    @Override
+    public int getDefense() {
+        return 0;
     }
 
     @Override

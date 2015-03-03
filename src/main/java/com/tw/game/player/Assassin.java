@@ -67,5 +67,8 @@ public class Assassin extends NormalPlayer{
         return Optional.of(this.armor);
     }
 
-
+    @Override
+    public int getDefense() {
+        return getArmor().get().getDefense();
+    }
 }

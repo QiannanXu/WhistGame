@@ -92,12 +92,8 @@ public class WhistGame {
 
     private int getAttackedBlood(NormalPlayer player1, NormalPlayer player2) {
         int attackedBlood;
-        if (player1.hasWeapon() && !player2.hasArmor()) {
-            attackedBlood = player1.getAttack() + player1.getWeapon().get().getAttack();
-        } else if (player1.hasWeapon() && player2.hasArmor()) {
-            attackedBlood = player1.getAttack() + player1.getWeapon().get().getAttack() - player2.getArmor().get().getDefense();
-        } else if (!player1.hasWeapon() && player2.hasArmor()) {
-            attackedBlood = player1.getAttack() - player2.getArmor().get().getDefense();
+        if (player2.hasArmor()) {
+            attackedBlood = player1.getAttack()  - player2.getDefense();
         } else {
             attackedBlood = player1.getAttack();
         }
@@ -121,12 +117,8 @@ public class WhistGame {
 
     private String getCommonAttackProcessOutput(NormalPlayer player1, NormalPlayer player2) {
         String output = "";
-        if (player1.hasWeapon() && !player2.hasArmor()) {
+        if (player1.hasWeapon()) {
             output += player1.getJob() + player1.getName() + "用" + player1.getWeapon().get().getName() + "攻击了" + player2.getJob() + player2.getName() + ",";
-        } else if (player1.hasWeapon() && player2.hasArmor()) {
-            output += player1.getJob() + player1.getName() + "用" + player1.getWeapon().get().getName() + "攻击了" + player2.getJob() + player2.getName() + ",";
-        } else if (!player1.hasWeapon() && player2.hasArmor()) {
-            output += player1.getJob() + player1.getName() + "攻击了" + player2.getJob() + player2.getName() + ",";
         } else {
             output += player1.getJob() + player1.getName() + "攻击了" + player2.getJob() + player2.getName() + ",";
         }

@@ -9,6 +9,8 @@ public interface Player {
     public Optional<Armor> getArmor();
     public boolean hasWeapon();
     public boolean hasArmor();
+    public int getAttack();
+    public int getDefense();
     public void dropBlood(NormalPlayer player);
     public void forward(int distance);
     public void backward(int distance);

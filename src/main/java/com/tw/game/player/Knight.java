@@ -66,4 +66,9 @@ public class Knight extends NormalPlayer{
     public Optional<Armor> getArmor() {
         return Optional.of(this.armor);
     }
+
+    @Override
+    public int getDefense() {
+        return getArmor().get().getDefense();
+    }
 }

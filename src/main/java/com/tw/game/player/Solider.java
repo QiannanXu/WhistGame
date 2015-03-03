@@ -28,9 +28,9 @@ public class Solider extends NormalPlayer {
     public void dropBlood(NormalPlayer player2) {
         int dropBlood;
         if(player2 instanceof Solider){
-            dropBlood =  this.getWeapon().get().getAttack() + this.getAttack() - player2.getArmor().get().getDefense();
+            dropBlood =  this.getAttack() - player2.getDefense();
         }else{
-            dropBlood = this.getWeapon().get().getAttack() + this.getAttack();
+            dropBlood = this.getAttack();
         }
 
         if(weapon.hasFeature() && weapon.getWeaponFeature().getType().equals("tripleDamage")){
@@ -60,4 +60,13 @@ public class Solider extends NormalPlayer {
         return Optional.of(this.armor);
     }
 
+    @Override
+    public int getAttack() {
+        return this.getWeapon().get().getAttack() + super.getAttack();
+    }
+
+    @Override
+    public int getDefense() {
+        return getArmor().get().getDefense();
+    }
 }
