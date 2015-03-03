@@ -11,19 +11,38 @@ public class NormalPlayer implements Player {
     private int blood;
     private int attack;
     private boolean poisonFlag = false;
+    private boolean attackValid;
     private WeaponFeature poisonState;
-    private int distance = 1;
+    private int distance;
+    private final static int attackScope = 2;
 
     public NormalPlayer(String job, String name, int blood, int attack) {
         this.job = job;
         this.name = name;
         this.blood = blood;
         this.attack = attack;
+        this.distance = 1;
     }
 
-    public void commonAttack(NormalPlayer player2){
-        dropBlood(player2);
-        modifyPoisonState(player2);
+    public NormalPlayer(String job, String name, int blood, int attack, int distance){
+        this.job = job;
+        this.name = name;
+        this.blood = blood;
+        this.attack = attack;
+        this.distance = distance;
+    }
+
+    public boolean commonAttack(NormalPlayer player2){
+        //不在攻击范围内
+        if(this.distance + player2.distance > attackScope ){
+            forward(1);
+            attackValid = false;
+        }else{
+            dropBlood(player2);
+            modifyPoisonState(player2);
+            attackValid = true;
+        }
+        return attackValid;
     }
 
     private void modifyPoisonState(NormalPlayer player2) {
@@ -35,21 +54,24 @@ public class NormalPlayer implements Player {
 
     @Override
     public void dropBlood(NormalPlayer player2) {
+        int droppedBlood;
         if(player2 instanceof Solider){
-            player2.blood = player2.blood - this.attack + player2.getDefense();
+            droppedBlood = this.attack - player2.getDefense();
         }else{
-            player2.blood = player2.blood - this.attack;
+            droppedBlood = this.attack;
         }
+
+        player2.blood -= droppedBlood;
     }
 
     @Override
     public void forward(int distance) {
-        this.distance += distance;
+        this.distance -= distance;
     }
 
     @Override
     public void backward(int distance) {
-        this.distance -= distance;
+        this.distance += distance;
     }
 
 
@@ -131,4 +153,5 @@ public class NormalPlayer implements Player {
     public void poisonAttack() {
         this.blood -= this.poisonState.getAttack();
     }
+
 }

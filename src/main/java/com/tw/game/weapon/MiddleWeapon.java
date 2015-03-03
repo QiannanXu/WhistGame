@@ -19,9 +19,7 @@ public class MiddleWeapon extends Weapon{
     }
 
     @Override
-    public void extraEffect(NormalPlayer player) {
-        if(player instanceof Solider){
-            
-        }
+    public String extraEffect() {
+        return "extraDefense";
     }
 }

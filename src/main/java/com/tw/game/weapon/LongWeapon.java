@@ -19,9 +19,7 @@ public class LongWeapon extends Weapon{
     }
 
     @Override
-    public void extraEffect(NormalPlayer player) {
-        if(player instanceof Knight){
-
-        }
+    public String extraEffect() {
+        return "backward";
     }
 }

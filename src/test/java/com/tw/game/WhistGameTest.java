@@ -3,8 +3,7 @@ package com.tw.game;
 import com.tw.game.armor.Armor;
 import com.tw.game.player.NormalPlayer;
 import com.tw.game.player.Solider;
-import com.tw.game.weapon.Weapon;
-import com.tw.game.weapon.WeaponFeature;
+import com.tw.game.weapon.*;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -159,15 +158,27 @@ public class WhistGameTest {
 
     }
 
+    @Test
+    public void shouldForwardWhenTwoPlayersAreOutOfAttackScope(){
+        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 3, 1, 2);
+        NormalPlayer player2 = new NormalPlayer("普通人", "李四", 3, 1, 2);
 
-//    @Test
-//    public void test(){
-//        Solider s1 = new Solider("j", "j", 2,3,null, null);
-//        if(s1 instanceof NormalPlayer){
-//            System.out.println("xxx");
-//        }
-//        if(s1 instanceof Solider){
-//            System.out.println("yyy");
-//        }
-//    }
+        whistGame = new WhistGame(player1, player2);
+        whistGame.startWhistGame();
+        String gameProcess = whistGame.getGameProcess();
+        assertThat(gameProcess, is("张三靠近了李四\n"+
+                "李四靠近了张三\n"+
+                "普通人张三攻击了普通人李四,李四受到了1点伤害,李四剩余生命：2\n"+
+                "普通人李四攻击了普通人张三,张三受到了1点伤害,张三剩余生命：2\n"+
+                "普通人张三攻击了普通人李四,李四受到了1点伤害,李四剩余生命：1\n"+
+                "普通人李四攻击了普通人张三,张三受到了1点伤害,张三剩余生命：1\n"+
+                "普通人张三攻击了普通人李四,李四受到了1点伤害,李四剩余生命：0\n"));
+    }
+
+    @Test
+    public void should(){
+        ShortWeapon shortWeapon = new ShortWeapon("短武器", 1);
+        MiddleWeapon middleWeapon = new MiddleWeapon("中武器", 1);
+        LongWeapon longWeapon = new LongWeapon("长武器", 1);
+    }
 }

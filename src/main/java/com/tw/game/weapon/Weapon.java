@@ -46,8 +46,8 @@ public class Weapon {
         return (weaponFeature != null) ? true : false;
     }
 
-    public void extraEffect(NormalPlayer player){
-
+    public String extraEffect(){
+        return "";
     }
 
 }

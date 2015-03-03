@@ -20,13 +20,10 @@ public class WhistGame {
 
         while (player1.isAlive() && player2.isAlive()) {
             //攻击前判断自己有没有延时等伤害，若有，先掉血
-            changeAttacker = false;
-            if (player1.isPoisoning()) {
-                gameProcess += poisonSelfAttack(player1);
-            }
+            changeAttacker = carryOutPoisonAttack();
             if (!changeAttacker) {
-                player1.commonAttack(player2);
-                gameProcess += getCommonAttackOutput(player1, player2);
+                boolean attackValid = player1.commonAttack(player2);
+                gameProcess += getCommonAttackOutput(player1, player2, attackValid);
             }
 
             NormalPlayer temp = player1;
@@ -35,6 +32,14 @@ public class WhistGame {
         }
 
         gameResult = ((!player1.isAlive()) ? player1.getName() : player2.getName()) + "被打败了";
+    }
+
+    private boolean carryOutPoisonAttack() {
+        changeAttacker = false;
+        if (player1.isPoisoning()) {
+            gameProcess += poisonSelfAttack(player1);
+        }
+        return changeAttacker;
     }
 
     private String poisonSelfAttack(NormalPlayer player1) {
@@ -84,9 +89,15 @@ public class WhistGame {
         return poisonOutput;
     }
 
-    private String getCommonAttackOutput(NormalPlayer player1, NormalPlayer player2) {
-        String output = getCommonAttackProcessOutput(player1, player2);
-        output += getCommonAttackResultString(player1, player2);
+    private String getCommonAttackOutput(NormalPlayer player1, NormalPlayer player2, boolean attackValid) {
+        String output = "";
+        if(attackValid){
+            output += getCommonAttackProcessOutput(player1, player2);
+            output += getCommonAttackResultString(player1, player2);
+        }else{
+            output += player1.getName()+"靠近了"+player2.getName()+"\n";
+        }
+
         return output;
     }
 

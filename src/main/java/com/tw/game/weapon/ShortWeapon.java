@@ -1,8 +1,5 @@
 package com.tw.game.weapon;
 
-import com.tw.game.player.Assassin;
-import com.tw.game.player.NormalPlayer;
-
 public class ShortWeapon extends Weapon{
     private final static int attackDistance = 1;
 
@@ -19,9 +16,7 @@ public class ShortWeapon extends Weapon{
     }
 
     @Override
-    public void extraEffect(NormalPlayer player) {
-        if(player instanceof Assassin){
-            
-        }
+    public String extraEffect() {
+        return "doubleAttack";
     }
 }
