@@ -12,6 +12,7 @@ public class NormalPlayer implements Player {
     private int attack;
     private boolean poisonFlag = false;
     private WeaponFeature poisonState;
+    private int distance = 1;
 
     public NormalPlayer(String job, String name, int blood, int attack) {
         this.job = job;
@@ -40,6 +41,17 @@ public class NormalPlayer implements Player {
             player2.blood = player2.blood - this.attack;
         }
     }
+
+    @Override
+    public void forward(int distance) {
+        this.distance += distance;
+    }
+
+    @Override
+    public void backward(int distance) {
+        this.distance -= distance;
+    }
+
 
     public String getName() {
         return name;

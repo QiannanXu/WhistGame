@@ -10,4 +10,6 @@ public interface Player {
     public boolean hasWeapon();
     public boolean hasArmor();
     public void dropBlood(NormalPlayer player);
+    public void forward(int distance);
+    public void backward(int distance);
 }
