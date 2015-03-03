@@ -1,5 +1,7 @@
 package com.tw.game.weapon;
 
+import com.tw.game.player.NormalPlayer;
+
 public class Weapon {
     private String name;
     private int attack;
@@ -42,6 +44,10 @@ public class Weapon {
 
     public boolean hasFeature() {
         return (weaponFeature != null) ? true : false;
+    }
+
+    public void extraEffect(NormalPlayer player){
+
     }
 
 }

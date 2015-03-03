@@ -31,6 +31,21 @@ public class Assassin extends NormalPlayer{
         this.armor = armor;
     }
 
+    @Override
+    public void dropBlood(NormalPlayer player2) {
+        int dropBlood;
+        if(player2 instanceof Solider){
+            dropBlood =  this.getWeapon().get().getAttack() + this.getAttack() - player2.getArmor().get().getDefense();
+        }else{
+            dropBlood = this.getWeapon().get().getAttack() + this.getAttack();
+        }
+
+        if(weapon.hasFeature() && weapon.getWeaponFeature().getType().equals("tripleDamage")){
+            dropBlood *= 3;
+        }
+
+        player2.setBlood(player2.getBlood() - dropBlood);
+    }
 
     @Override
     public boolean hasWeapon() {
