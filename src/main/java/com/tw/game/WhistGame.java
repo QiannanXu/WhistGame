@@ -1,11 +1,13 @@
 package com.tw.game;
 
+import com.google.common.base.Joiner;
 import com.tw.game.player.NormalPlayer;
-import com.tw.game.weapon.WeaponFeature;
+
+import java.util.ArrayList;
 
 public class WhistGame {
 
-    private String gameProcess = "";
+    private ArrayList<String> gameRecorder = new ArrayList<>();
     private NormalPlayer player1;
     private NormalPlayer player2;
 
@@ -18,11 +20,11 @@ public class WhistGame {
 
         while (player1.isAlive() && player2.isAlive()) {
             //攻击前判断自己有没有延时等伤害，若有，先掉血
-            gameProcess += player1.carryOutPoisonAttack();
+            gameRecorder.add(player1.carryOutPoisonAttack());
 
             if (!player1.whetherChangeAttacker()) {
                 boolean attackValid = player1.commonAttack(player2);
-                gameProcess += getCommonAttackOutput(player1, player2, attackValid);
+                gameRecorder.add(getCommonAttackOutput(player1, player2, attackValid));
             }
 
             NormalPlayer temp = player1;
@@ -84,8 +86,8 @@ public class WhistGame {
         return output;
     }
 
-    public String getGameProcess() {
-        return gameProcess;
+    public String getGameRecorder() {
+        return Joiner.on("").join(gameRecorder);
     }
 
     public String getGameResult() {
