@@ -6,22 +6,23 @@ import com.tw.game.weapon.WeaponFeature;
 import com.tw.game.weapon.Weapon;
 
 public class NormalPlayer implements Player {
-    private String job;
-    private String name;
-    private int blood;
-    private int attack;
+    protected String job;
+    protected String name;
+    protected int blood;
+    protected int attack;
+
     private boolean poisonFlag = false;
     private boolean attackValid;
     private WeaponFeature poisonState;
     private int distance;
     private final static int attackScope = 2;
 
-    public NormalPlayer(String job, String name, int blood, int attack) {
-        this.job = job;
+    public NormalPlayer(String name, int blood, int attack) {
+        this.job = "普通人";
+        this.distance = 1;
         this.name = name;
         this.blood = blood;
         this.attack = attack;
-        this.distance = 1;
     }
 
     public NormalPlayer(String job, String name, int blood, int attack, int distance){

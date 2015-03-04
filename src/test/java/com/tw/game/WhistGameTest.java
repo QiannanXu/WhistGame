@@ -1,6 +1,7 @@
 package com.tw.game;
 
 import com.tw.game.armor.Armor;
+import com.tw.game.player.Assassin;
 import com.tw.game.player.NormalPlayer;
 import com.tw.game.player.Solider;
 import com.tw.game.weapon.*;
@@ -14,8 +15,8 @@ public class WhistGameTest {
 
     @Test
     public void shouldPrintLiSiIsDefeated() {
-        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 1, 1);
-        NormalPlayer player2 = new NormalPlayer("普通人", "李四", 1, 1);
+        NormalPlayer player1 = new NormalPlayer("张三", 1, 1);
+        NormalPlayer player2 = new NormalPlayer("李四", 1, 1);
         whistGame = new WhistGame(player1, player2);
 
         whistGame.startWhistGame();
@@ -30,8 +31,8 @@ public class WhistGameTest {
     public void shouldPrintCorrectGameProcessWhenPlayerFightsWithASolider() {
         Weapon weapon = new Weapon("优质木棒", 1);
         Armor armor = new Armor("护具", 1);
-        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 10, 8);
-        NormalPlayer player2 = new Solider("战士", "李四", 20, 2, weapon, armor);
+        NormalPlayer player1 = new NormalPlayer("张三", 10, 8);
+        NormalPlayer player2 = new Solider("李四", 20, 2, weapon, armor);
 
         whistGame = new WhistGame(player1, player2);
         whistGame.startWhistGame();
@@ -49,8 +50,8 @@ public class WhistGameTest {
         WeaponFeature weaponFeature = WeaponFeature.Toxicity;
         Weapon weapon = new Weapon("优质毒剑", 1, weaponFeature);
         Armor armor = new Armor("护具", 1);
-        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 10, 8);
-        NormalPlayer player2 = new Solider("战士", "李四", 20, 2, weapon, armor);
+        NormalPlayer player1 = new NormalPlayer("张三", 10, 8);
+        NormalPlayer player2 = new Solider("李四", 20, 2, weapon, armor);
 
         whistGame = new WhistGame(player1, player2);
         whistGame.startWhistGame();
@@ -71,8 +72,8 @@ public class WhistGameTest {
         WeaponFeature weaponFeature = WeaponFeature.Fire;
         Weapon weapon = new Weapon("火焰剑", 2, weaponFeature);
         Armor armor = new Armor("护具", 1);
-        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 11, 5);
-        NormalPlayer player2 = new Solider("战士", "李四", 13, 2, weapon, armor);
+        NormalPlayer player1 = new NormalPlayer("张三", 11, 5);
+        NormalPlayer player2 = new Solider("李四", 13, 2, weapon, armor);
 
         whistGame = new WhistGame(player1, player2);
         whistGame.startWhistGame();
@@ -93,8 +94,8 @@ public class WhistGameTest {
         WeaponFeature weaponFeature = WeaponFeature.Icy;
         Weapon weapon = new Weapon("寒冰剑", 2, weaponFeature);
         Armor armor = new Armor("护具", 1);
-        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 17, 5);
-        NormalPlayer player2 = new Solider("战士", "李四", 13, 2, weapon, armor);
+        NormalPlayer player1 = new NormalPlayer("张三", 17, 5);
+        NormalPlayer player2 = new Solider("李四", 13, 2, weapon, armor);
 
         whistGame = new WhistGame(player1, player2);
         whistGame.startWhistGame();
@@ -118,8 +119,8 @@ public class WhistGameTest {
         WeaponFeature weaponFeature = WeaponFeature.Faint;
         Weapon weapon = new Weapon("晕锤", 2, weaponFeature);
         Armor armor = new Armor("护具", 1);
-        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 17, 5);
-        NormalPlayer player2 = new Solider("战士", "李四", 13, 2, weapon, armor);
+        NormalPlayer player1 = new NormalPlayer("张三", 17, 5);
+        NormalPlayer player2 = new Solider("李四", 13, 2, weapon, armor);
 
         whistGame = new WhistGame(player1, player2);
         whistGame.startWhistGame();
@@ -145,8 +146,8 @@ public class WhistGameTest {
         Weapon weapon = new Weapon("利剑", 2, weaponFeature);
         Armor armor = new Armor("护具", 1);
 
-        NormalPlayer player1 = new Solider("战士", "李四", 13, 2, weapon, armor);
-        NormalPlayer player2 = new NormalPlayer("普通人", "张三", 17, 5);
+        NormalPlayer player1 = new Solider("李四", 13, 2, weapon, armor);
+        NormalPlayer player2 = new NormalPlayer("张三", 17, 5);
         whistGame = new WhistGame(player1, player2);
         whistGame.startWhistGame();
         String gameProcess = whistGame.getGameProcess();

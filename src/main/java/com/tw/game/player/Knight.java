@@ -13,20 +13,21 @@ public class Knight extends NormalPlayer{
     private Weapon weapon;
     private Armor armor;
 
-    public Knight(String job, String name, int blood, int attack, Weapon weapon, Armor armor) {
-        super(job, name, blood, attack);
+    public Knight(String name, int blood, int attack, Weapon weapon, Armor armor) {
+        super(name, blood, attack);
+        this.job = "骑士";
         this.weapon = weapon;
         this.armor = armor;
     }
 
     public Knight(String job, String name, int blood, int attack, MiddleWeapon weapon, Armor armor) {
-        super(job, name, blood, attack);
+        super(name, blood, attack);
         this.weapon = weapon;
         this.armor = armor;
     }
 
     public Knight(String job, String name, int blood, int attack, LongWeapon weapon, Armor armor) {
-        super(job, name, blood, attack);
+        super(name, blood, attack);
         this.weapon = weapon;
         this.armor = armor;
     }

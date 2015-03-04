@@ -13,20 +13,21 @@ public class Assassin extends NormalPlayer{
     private Armor armor;
     private Weapon weapon;
 
-    public Assassin(String job, String name, int blood, int attack, Weapon weapon, Armor armor) {
-        super(job, name, blood, attack);
-        this.weapon = weapon;
+    public Assassin(String name, int blood, int attack, Weapon weapon, Armor armor) {
+        super(name, blood, attack);
+        this.job = "刺客";
         this.armor = armor;
+        this.weapon = weapon;
     }
 
     public Assassin(String job, String name, int blood, int attack, MiddleWeapon weapon, Armor armor) {
-        super(job, name, blood, attack);
+        super(name, blood, attack);
         this.weapon = weapon;
         this.armor = armor;
     }
 
     public Assassin(String job, String name, int blood, int attack, ShortWeapon weapon, Armor armor) {
-        super(job, name, blood, attack);
+        super(name, blood, attack);
         this.weapon = weapon;
         this.armor = armor;
     }

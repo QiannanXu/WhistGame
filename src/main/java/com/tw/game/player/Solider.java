@@ -12,14 +12,15 @@ public class Solider extends NormalPlayer {
     private Weapon weapon;
     private Armor armor;
 
-    public Solider(String job, String name, int blood, int attack, Weapon weapon, Armor armor) {
-        super(job, name, blood, attack);
+    public Solider(String name, int blood, int attack, Weapon weapon, Armor armor) {
+        super(name, blood, attack);
+        this.job = "战士";
         this.weapon = weapon;
         this.armor = armor;
     }
 
     public Solider(String job, String name, int blood, int attack, MiddleWeapon weapon, Armor armor) {
-        super(job, name, blood, attack);
+        super(name, blood, attack);
         this.weapon = weapon;
         this.armor = armor;
     }
