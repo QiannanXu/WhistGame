@@ -175,10 +175,4 @@ public class WhistGameTest {
                 "普通人张三攻击了普通人李四,李四受到了1点伤害,李四剩余生命：0\n"));
     }
 
-    @Test
-    public void should(){
-        ShortWeapon shortWeapon = new ShortWeapon("短武器", 1);
-        MiddleWeapon middleWeapon = new MiddleWeapon("中武器", 1);
-        LongWeapon longWeapon = new LongWeapon("长武器", 1);
-    }
 }
