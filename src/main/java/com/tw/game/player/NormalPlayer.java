@@ -6,16 +6,18 @@ import com.tw.game.weapon.WeaponFeature;
 import com.tw.game.weapon.Weapon;
 
 public class NormalPlayer implements Player {
+    private final static int attackScope = 2;
+
     protected String job;
     protected String name;
     protected int blood;
-    protected int attack;
 
+    protected int attack;
     private boolean poisonFlag = false;
     private boolean attackValid;
     private WeaponFeature poisonState;
     private int distance;
-    private final static int attackScope = 2;
+    private boolean changeAttacker = false;
 
     public NormalPlayer(String name, int blood, int attack) {
         this.job = "普通人";
@@ -36,13 +38,13 @@ public class NormalPlayer implements Player {
             attackValid = false;
         }else{
             dropBlood(player2);
-            modifyPoisonState(player2);
+            makePoisoned(player2);
             attackValid = true;
         }
         return attackValid;
     }
 
-    private void modifyPoisonState(NormalPlayer player2) {
+    private void makePoisoned(NormalPlayer player2) {
         if(this.hasWeapon() && this.getWeapon().get().hasFeature() && !player2.isPoisoning()){
            player2.poisonFlag = true;
            player2.poisonState = this.getWeapon().get().getWeaponFeature();
@@ -155,5 +157,76 @@ public class NormalPlayer implements Player {
         this.blood -= this.poisonState.getAttack();
     }
 
+    public String poisonSelfAttack() {
+        String poisonOutput = "";
 
+        WeaponFeature poisonState = getPoisonState();
+        if (poisonState.getType().equals("damageDelay")) {
+            poisonOutput = damageDelaySituation();
+        } else if (poisonState.getType().equals("eachTwoRoundNoAttack")) {
+            poisonOutput = eachTwoRoundNoAttackSituation();
+        } else if (poisonState.getType().equals("twoRoundNoAttack")) {
+            poisonOutput = twoRoundNoAttackSituation();
+        }
+
+        return poisonOutput;
+    }
+
+    private String twoRoundNoAttackSituation() {
+        WeaponFeature poisonState = getPoisonState();
+        String poisonOutput = "";
+
+        if (poisonState.getPoisonRound() > 0) {
+            poisonOutput += getName() + "晕倒了,无法攻击,眩晕还剩" + (poisonState.getPoisonRound() - 1) + "轮\n";
+            changeAttacker = true;
+            poisonState.setPoisonRound(poisonState.getPoisonRound() - 1);
+        } else {
+            poisonState.setPoisonRound(2);
+            changeAttacker = false;
+        }
+        return poisonOutput;
+    }
+
+    private String eachTwoRoundNoAttackSituation() {
+        WeaponFeature poisonState = getPoisonState();
+        String poisonOutput = "";
+
+        if (poisonState.getPoisonRound() <= 0) {
+            poisonOutput += getName() + "冻得直哆嗦，没有击中\n";
+            changeAttacker = true;
+            poisonState.setPoisonRound(2);
+        } else {
+            poisonState.setPoisonRound(poisonState.getPoisonRound() - 1);
+            changeAttacker = false;
+        }
+        return poisonOutput;
+    }
+
+    private String damageDelaySituation() {
+        WeaponFeature poisonState = getPoisonState();
+
+        String poisonOutput = "";
+        poisonAttack();
+        if (isDead()) {
+            changeAttacker = true;
+        }
+        poisonOutput += getName() + "受到" + poisonState.getAttack() + "点" + poisonState.getName() + "伤害,";
+        poisonOutput += getName() + "剩余生命：" + getBlood() + "\n";
+        return poisonOutput;
+    }
+
+
+    public boolean whetherChangeAttacker() {
+        return changeAttacker;
+    }
+
+    public String carryOutPoisonAttack() {
+        changeAttacker = false;
+        String gameProcess = "";
+        if (isPoisoning()) {
+            gameProcess += poisonSelfAttack();
+            changeAttacker = whetherChangeAttacker();
+        }
+        return gameProcess;
+    }
 }

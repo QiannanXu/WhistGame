@@ -6,10 +6,8 @@ import com.tw.game.weapon.WeaponFeature;
 public class WhistGame {
 
     private String gameProcess = "";
-    private String gameResult = "";
     private NormalPlayer player1;
     private NormalPlayer player2;
-    private boolean changeAttacker = false;
 
     public WhistGame(NormalPlayer player1, NormalPlayer player2) {
         this.player1 = player1;
@@ -20,8 +18,9 @@ public class WhistGame {
 
         while (player1.isAlive() && player2.isAlive()) {
             //攻击前判断自己有没有延时等伤害，若有，先掉血
-            changeAttacker = carryOutPoisonAttack();
-            if (!changeAttacker) {
+            gameProcess += player1.carryOutPoisonAttack();
+
+            if (!player1.whetherChangeAttacker()) {
                 boolean attackValid = player1.commonAttack(player2);
                 gameProcess += getCommonAttackOutput(player1, player2, attackValid);
             }
@@ -32,70 +31,6 @@ public class WhistGame {
         }
 
 
-    }
-
-    private boolean carryOutPoisonAttack() {
-        changeAttacker = false;
-        if (player1.isPoisoning()) {
-            gameProcess += poisonSelfAttack(player1);
-        }
-        return changeAttacker;
-    }
-
-    private String poisonSelfAttack(NormalPlayer player1) {
-        String poisonOutput = "";
-
-        WeaponFeature poisonState = player1.getPoisonState();
-        if (poisonState.getType().equals("damageDelay")) {
-            poisonOutput = damageDelaySituation(player1);
-        } else if (poisonState.getType().equals("eachTwoRoundNoAttack")) {
-            poisonOutput = eachTwoRoundNoAttackSituation(player1);
-        } else if (poisonState.getType().equals("twoRoundNoAttack")) {
-            poisonOutput = twoRoundNoAttackSituation(player1);
-        }
-
-        return poisonOutput;
-    }
-
-    private String twoRoundNoAttackSituation(NormalPlayer player1) {
-        WeaponFeature poisonState = player1.getPoisonState();
-        String poisonOutput = "";
-
-        if (poisonState.getPoisonRound() > 0) {
-            poisonOutput += player1.getName() + "晕倒了,无法攻击,眩晕还剩" + (poisonState.getPoisonRound() - 1) + "轮\n";
-            changeAttacker = true;
-            poisonState.setPoisonRound(poisonState.getPoisonRound() - 1);
-        } else {
-            poisonState.setPoisonRound(2);
-        }
-        return poisonOutput;
-    }
-
-    private String eachTwoRoundNoAttackSituation(NormalPlayer player1) {
-        WeaponFeature poisonState = player1.getPoisonState();
-        String poisonOutput = "";
-
-        if (poisonState.getPoisonRound() <= 0) {
-            poisonOutput += player1.getName() + "冻得直哆嗦，没有击中\n";
-            changeAttacker = true;
-            poisonState.setPoisonRound(2);
-        } else {
-            poisonState.setPoisonRound(poisonState.getPoisonRound() - 1);
-        }
-        return poisonOutput;
-    }
-
-    private String damageDelaySituation(NormalPlayer player1) {
-        WeaponFeature poisonState = player1.getPoisonState();
-
-        String poisonOutput = "";
-        player1.poisonAttack();
-        if (!player1.isAlive()) {
-            changeAttacker = true;
-        }
-        poisonOutput += player1.getName() + "受到" + poisonState.getAttack() + "点" + poisonState.getName() + "伤害,";
-        poisonOutput += player1.getName() + "剩余生命：" + player1.getBlood() + "\n";
-        return poisonOutput;
     }
 
     private String getCommonAttackOutput(NormalPlayer player1, NormalPlayer player2,  boolean attackValid) {
@@ -154,8 +89,9 @@ public class WhistGame {
     }
 
     public String getGameResult() {
+        String gameResult = "";
         if(player1.isDead()){
-            gameResult  = player1.getName()+"被打败了";
+            gameResult = player1.getName()+"被打败了";
         } else {
             gameResult = player2.getName()+"被打败了";
         }
