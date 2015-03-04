@@ -17,6 +17,7 @@ public class Solider extends NormalPlayer {
         this.job = "战士";
         this.weapon = weapon;
         this.armor = armor;
+        this.defense = this.armor.getDefense();
     }
 
     @Override
@@ -66,7 +67,7 @@ public class Solider extends NormalPlayer {
     }
 
     @Override
-    public String getWeaponExtraEffect(NormalPlayer player2) {
+    public String getWeaponExtraEffect() {
         if(weapon instanceof MiddleWeapon){
             return weapon.extraEffect();
         }

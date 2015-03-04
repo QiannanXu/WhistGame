@@ -18,6 +18,7 @@ public class Assassin extends NormalPlayer{
         this.job = "刺客";
         this.armor = armor;
         this.weapon = weapon;
+        this.defense = this.armor.getDefense();
     }
 
     @Override
@@ -62,7 +63,7 @@ public class Assassin extends NormalPlayer{
     }
 
     @Override
-    public String getWeaponExtraEffect(NormalPlayer player2) {
+    public String getWeaponExtraEffect() {
         if(weapon instanceof ShortWeapon){
             return weapon.extraEffect();
         }

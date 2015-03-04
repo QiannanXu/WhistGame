@@ -1,8 +1,5 @@
 package com.tw.game.weapon;
 
-import com.tw.game.player.NormalPlayer;
-import com.tw.game.player.Solider;
-
 public class MiddleWeapon extends Weapon{
     private final static int attackDistance = 1;
 

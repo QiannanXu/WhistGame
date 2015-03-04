@@ -1,8 +1,5 @@
 package com.tw.game.weapon;
 
-import com.tw.game.player.Knight;
-import com.tw.game.player.NormalPlayer;
-
 public class LongWeapon extends Weapon{
     private final static int attackDistance = 2;
 

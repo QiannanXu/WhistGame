@@ -1,7 +1,5 @@
 package com.tw.game.weapon;
 
-import com.tw.game.player.NormalPlayer;
-
 public class Weapon {
     private String name;
     private int attack;

@@ -18,6 +18,7 @@ public class Knight extends NormalPlayer{
         this.job = "骑士";
         this.weapon = weapon;
         this.armor = armor;
+        this.defense = this.armor.getDefense();
     }
 
     @Override
@@ -62,7 +63,7 @@ public class Knight extends NormalPlayer{
     }
 
     @Override
-    public String getWeaponExtraEffect(NormalPlayer player2) {
+    public String getWeaponExtraEffect() {
         if(weapon instanceof LongWeapon){
             return weapon.extraEffect();
         }

@@ -11,6 +11,7 @@ public class NormalPlayer implements Player {
     protected String job;
     protected String name;
     protected int blood;
+    protected int defense;
 
     protected int attack;
     private boolean poisonFlag = false;
@@ -21,6 +22,7 @@ public class NormalPlayer implements Player {
     public NormalPlayer(String name, int blood, int attack) {
         this.job = "普通人";
         this.distance = 1;
+        this.defense = 0;
         this.name = name;
         this.blood = blood;
         this.attack = attack;
@@ -39,11 +41,23 @@ public class NormalPlayer implements Player {
         }else{
             //攻击, 掉血，中毒，武器的extraEffect
             dropBlood(player2);
+            carryoutWeaponExtraEffect(player2);
             makePoisoned(player2);
             attackValid = true;
         }
         return attackValid;
     }
+
+    private void carryoutWeaponExtraEffect(NormalPlayer player2) {
+        if(getWeaponExtraEffect().equals("backward")){
+            player2.backward(1);
+        }else if(getWeaponExtraEffect().equals("doubleAttack")){
+            dropBlood(player2);
+        }else if(getWeaponExtraEffect().equals("extraDefense")){
+            addDefense();
+        }
+    }
+
 
     private void makePoisoned(NormalPlayer player2) {
         if(this.hasWeapon() && this.getWeapon().get().hasFeature() && !player2.isPoisoning()){
@@ -75,8 +89,13 @@ public class NormalPlayer implements Player {
     }
 
     @Override
-    public String getWeaponExtraEffect(NormalPlayer player) {
+    public String getWeaponExtraEffect() {
         return "";
+    }
+
+    @Override
+    public void addDefense() {
+        defense++;
     }
 
 

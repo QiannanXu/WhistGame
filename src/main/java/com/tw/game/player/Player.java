@@ -14,5 +14,6 @@ public interface Player {
     public void dropBlood(NormalPlayer player);
     public void forward(int distance);
     public void backward(int distance);
-    public String getWeaponExtraEffect(NormalPlayer player);
+    public String getWeaponExtraEffect();
+    public void addDefense();
 }
