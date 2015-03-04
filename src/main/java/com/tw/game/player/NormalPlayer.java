@@ -14,7 +14,6 @@ public class NormalPlayer implements Player {
 
     protected int attack;
     private boolean poisonFlag = false;
-    private boolean attackValid;
     private WeaponFeature poisonState;
     private int distance;
     private boolean changeAttacker = false;
@@ -33,10 +32,12 @@ public class NormalPlayer implements Player {
 
     public boolean commonAttack(NormalPlayer player2){
         //不在攻击范围内
+        boolean attackValid;
         if(this.distance + player2.distance > attackScope ){
             forward(1);
             attackValid = false;
         }else{
+            //攻击, 掉血，中毒，武器的extraEffect
             dropBlood(player2);
             makePoisoned(player2);
             attackValid = true;
@@ -71,6 +72,11 @@ public class NormalPlayer implements Player {
     @Override
     public void backward(int distance) {
         this.distance += distance;
+    }
+
+    @Override
+    public String getWeaponExtraEffect(NormalPlayer player) {
+        return "";
     }
 
 
@@ -229,4 +235,5 @@ public class NormalPlayer implements Player {
         }
         return gameProcess;
     }
+
 }

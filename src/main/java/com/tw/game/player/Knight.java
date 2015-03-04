@@ -2,6 +2,8 @@ package com.tw.game.player;
 
 import com.google.common.base.Optional;
 import com.tw.game.armor.Armor;
+import com.tw.game.weapon.LongWeapon;
+import com.tw.game.weapon.ShortWeapon;
 import com.tw.game.weapon.Weapon;
 
 /**
@@ -57,5 +59,13 @@ public class Knight extends NormalPlayer{
     @Override
     public int getDefense() {
         return getArmor().get().getDefense();
+    }
+
+    @Override
+    public String getWeaponExtraEffect(NormalPlayer player2) {
+        if(weapon instanceof LongWeapon){
+            return weapon.extraEffect();
+        }
+        return "";
     }
 }

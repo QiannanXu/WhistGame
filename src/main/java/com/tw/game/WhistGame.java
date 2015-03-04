@@ -24,6 +24,7 @@ public class WhistGame {
 
             if (!player1.whetherChangeAttacker()) {
                 boolean attackValid = player1.commonAttack(player2);
+//                gameRecorder.add(player1.carryWeaponExtraEffect(player2));
                 gameRecorder.add(getCommonAttackOutput(player1, player2, attackValid));
             }
 
@@ -86,11 +87,11 @@ public class WhistGame {
         return output;
     }
 
-    public String getGameRecorder() {
+    public String displayGameRecorder() {
         return Joiner.on("").join(gameRecorder);
     }
 
-    public String getGameResult() {
+    public String displayGameResult() {
         String gameResult = "";
         if(player1.isDead()){
             gameResult = player1.getName()+"被打败了";

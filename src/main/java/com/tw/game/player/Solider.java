@@ -2,6 +2,7 @@ package com.tw.game.player;
 
 import com.google.common.base.Optional;
 import com.tw.game.armor.Armor;
+import com.tw.game.weapon.MiddleWeapon;
 import com.tw.game.weapon.Weapon;
 
 /**
@@ -62,5 +63,13 @@ public class Solider extends NormalPlayer {
     @Override
     public int getDefense() {
         return getArmor().get().getDefense();
+    }
+
+    @Override
+    public String getWeaponExtraEffect(NormalPlayer player2) {
+        if(weapon instanceof MiddleWeapon){
+            return weapon.extraEffect();
+        }
+        return "";
     }
 }
