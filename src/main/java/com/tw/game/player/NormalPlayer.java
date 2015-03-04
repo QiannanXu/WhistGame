@@ -24,12 +24,8 @@ public class NormalPlayer implements Player {
         this.blood = blood;
         this.attack = attack;
     }
-
-    public NormalPlayer(String job, String name, int blood, int attack, int distance){
-        this.job = job;
-        this.name = name;
-        this.blood = blood;
-        this.attack = attack;
+    public NormalPlayer(String name, int blood, int attack, int distance) {
+        this(name, blood, attack);
         this.distance = distance;
     }
 
@@ -105,7 +101,11 @@ public class NormalPlayer implements Player {
     }
 
     public boolean isAlive() {
-        return (this.blood > 0) ? true : false;
+        return this.blood > 0;
+    }
+
+    public boolean isDead(){
+        return this.blood <= 0 ;
     }
 
     @Override
@@ -154,5 +154,6 @@ public class NormalPlayer implements Player {
     public void poisonAttack() {
         this.blood -= this.poisonState.getAttack();
     }
+
 
 }

@@ -47,7 +47,7 @@ public class Weapon {
     }
 
     public String extraEffect(){
-        return "";
+        return "none";
     }
 
 }

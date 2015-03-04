@@ -1,7 +1,6 @@
 package com.tw.game;
 
 import com.tw.game.armor.Armor;
-import com.tw.game.player.Assassin;
 import com.tw.game.player.NormalPlayer;
 import com.tw.game.player.Solider;
 import com.tw.game.weapon.*;
@@ -161,8 +160,8 @@ public class WhistGameTest {
 
     @Test
     public void shouldForwardWhenTwoPlayersAreOutOfAttackScope(){
-        NormalPlayer player1 = new NormalPlayer("普通人", "张三", 3, 1, 2);
-        NormalPlayer player2 = new NormalPlayer("普通人", "李四", 3, 1, 2);
+        NormalPlayer player1 = new NormalPlayer("张三", 3, 1, 2);
+        NormalPlayer player2 = new NormalPlayer("李四", 3, 1, 2);
 
         whistGame = new WhistGame(player1, player2);
         whistGame.startWhistGame();

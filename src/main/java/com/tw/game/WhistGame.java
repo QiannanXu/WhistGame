@@ -31,7 +31,7 @@ public class WhistGame {
             player2 = temp;
         }
 
-        gameResult = ((!player1.isAlive()) ? player1.getName() : player2.getName()) + "被打败了";
+
     }
 
     private boolean carryOutPoisonAttack() {
@@ -145,6 +145,12 @@ public class WhistGame {
     }
 
     public String getGameResult() {
+        if(player1.isDead()){
+            gameResult  = player1.getName()+"被打败了";
+        } else {
+            gameResult = player2.getName()+"被打败了";
+        }
+
         return gameResult;
     }
 }

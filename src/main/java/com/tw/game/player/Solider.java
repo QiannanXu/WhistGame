@@ -2,7 +2,6 @@ package com.tw.game.player;
 
 import com.google.common.base.Optional;
 import com.tw.game.armor.Armor;
-import com.tw.game.weapon.MiddleWeapon;
 import com.tw.game.weapon.Weapon;
 
 /**
@@ -15,12 +14,6 @@ public class Solider extends NormalPlayer {
     public Solider(String name, int blood, int attack, Weapon weapon, Armor armor) {
         super(name, blood, attack);
         this.job = "战士";
-        this.weapon = weapon;
-        this.armor = armor;
-    }
-
-    public Solider(String job, String name, int blood, int attack, MiddleWeapon weapon, Armor armor) {
-        super(name, blood, attack);
         this.weapon = weapon;
         this.armor = armor;
     }

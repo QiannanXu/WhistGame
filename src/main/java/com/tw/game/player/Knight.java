@@ -2,8 +2,6 @@ package com.tw.game.player;
 
 import com.google.common.base.Optional;
 import com.tw.game.armor.Armor;
-import com.tw.game.weapon.LongWeapon;
-import com.tw.game.weapon.MiddleWeapon;
 import com.tw.game.weapon.Weapon;
 
 /**
@@ -16,18 +14,6 @@ public class Knight extends NormalPlayer{
     public Knight(String name, int blood, int attack, Weapon weapon, Armor armor) {
         super(name, blood, attack);
         this.job = "骑士";
-        this.weapon = weapon;
-        this.armor = armor;
-    }
-
-    public Knight(String job, String name, int blood, int attack, MiddleWeapon weapon, Armor armor) {
-        super(name, blood, attack);
-        this.weapon = weapon;
-        this.armor = armor;
-    }
-
-    public Knight(String job, String name, int blood, int attack, LongWeapon weapon, Armor armor) {
-        super(name, blood, attack);
         this.weapon = weapon;
         this.armor = armor;
     }
