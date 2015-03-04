@@ -47,17 +47,20 @@ public class WhistGame {
 
         WeaponFeature poisonState = player1.getPoisonState();
         if (poisonState.getType().equals("damageDelay")) {
-            poisonOutput = damageDelaySituation(player1, poisonOutput, poisonState);
+            poisonOutput = damageDelaySituation(player1);
         } else if (poisonState.getType().equals("eachTwoRoundNoAttack")) {
-            poisonOutput = eachTwoRoundNoAttackSituation(player1, poisonOutput, poisonState);
+            poisonOutput = eachTwoRoundNoAttackSituation(player1);
         } else if (poisonState.getType().equals("twoRoundNoAttack")) {
-            poisonOutput = twoRoundNoAttackSituation(player1, poisonOutput, poisonState);
+            poisonOutput = twoRoundNoAttackSituation(player1);
         }
 
         return poisonOutput;
     }
 
-    private String twoRoundNoAttackSituation(NormalPlayer player1, String poisonOutput, WeaponFeature poisonState) {
+    private String twoRoundNoAttackSituation(NormalPlayer player1) {
+        WeaponFeature poisonState = player1.getPoisonState();
+        String poisonOutput = "";
+
         if (poisonState.getPoisonRound() > 0) {
             poisonOutput += player1.getName() + "晕倒了,无法攻击,眩晕还剩" + (poisonState.getPoisonRound() - 1) + "轮\n";
             changeAttacker = true;
@@ -68,7 +71,10 @@ public class WhistGame {
         return poisonOutput;
     }
 
-    private String eachTwoRoundNoAttackSituation(NormalPlayer player1, String poisonOutput, WeaponFeature poisonState) {
+    private String eachTwoRoundNoAttackSituation(NormalPlayer player1) {
+        WeaponFeature poisonState = player1.getPoisonState();
+        String poisonOutput = "";
+
         if (poisonState.getPoisonRound() <= 0) {
             poisonOutput += player1.getName() + "冻得直哆嗦，没有击中\n";
             changeAttacker = true;
@@ -79,7 +85,10 @@ public class WhistGame {
         return poisonOutput;
     }
 
-    private String damageDelaySituation(NormalPlayer player1, String poisonOutput, WeaponFeature poisonState) {
+    private String damageDelaySituation(NormalPlayer player1) {
+        WeaponFeature poisonState = player1.getPoisonState();
+
+        String poisonOutput = "";
         player1.poisonAttack();
         if (!player1.isAlive()) {
             changeAttacker = true;
@@ -89,7 +98,7 @@ public class WhistGame {
         return poisonOutput;
     }
 
-    private String getCommonAttackOutput(NormalPlayer player1, NormalPlayer player2, boolean attackValid) {
+    private String getCommonAttackOutput(NormalPlayer player1, NormalPlayer player2,  boolean attackValid) {
         String output = "";
         if(attackValid){
             output += getCommonAttackProcessOutput(player1, player2);
